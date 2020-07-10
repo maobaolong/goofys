@@ -56,6 +56,10 @@ type FlagStorage struct {
 	DebugS3    bool
 	Foreground bool
 
+	// Readahead
+	MaxReadAhead   uint32
+	ReadAheadChunk uint32
+
 	// MPU
 	MPUPartSize uint64
 }
