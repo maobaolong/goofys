@@ -615,6 +615,7 @@ func (fh *FileHandle) readFromStream(offset int64, buf []byte) (bytesRead int, e
 		resp, err := fh.cloud.GetBlob(&GetBlobInput{
 			Key:   fh.key,
 			Start: uint64(offset),
+			Count: uint64(fh.inode.fs.flags.ReadAheadChunk),
 		})
 		if err != nil {
 			return bytesRead, err
