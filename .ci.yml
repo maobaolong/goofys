@@ -7,10 +7,17 @@ mr:
     include:
     - master
 
+# global variables
+variables: &global-variables
+  GIT_SUBMODULE_STRATEGY: none
+
 stages:
 - stage:
   - job:
       name: Linux Job
+      variables:
+        <<: *global-variables
+        GIT_SUBMODULE_STRATEGY: none
       pool:
         container: mirrors.tencent.com/ci/tlinux_ci:latest
       steps:
@@ -28,6 +35,8 @@ stages:
             pwd
             env
             echo "--------------end------------"
+            git submodule init
+            git submodule update
             go build -ldflags "-X main.Version=`git rev-parse HEAD`"
       - taskType: marketBuild@latest
         displayName: Upload Artifacts
