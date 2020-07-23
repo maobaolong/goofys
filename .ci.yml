@@ -24,11 +24,10 @@ stages:
             mkdir -p /home/baoloongmao/go/src/github.com/kahing
             ln -s `pwd` /home/baoloongmao/go/src/github.com/kahing/goofys
             cd /home/baoloongmao/go/src/github.com/kahing/goofys
+            export GOPATH=/home/baoloongmao/go
             pwd
             env
-            echo "--------------start------------"
-            git submodule init
-            git submodule update
+            echo "--------------end------------"
             go build -ldflags "-X main.Version=`git rev-parse HEAD`"
       - taskType: marketBuild@latest
         displayName: Upload Artifacts
