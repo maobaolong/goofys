@@ -7,16 +7,11 @@ mr:
     include:
     - master
 
-# global variables
-variables: &global-variables
-  GIT_SUBMODULE_STRATEGY: none
-
 stages:
 - stage:
   - job:
       name: Linux Job
       variables:
-        <<: *global-variables
         GIT_SUBMODULE_STRATEGY: none
       pool:
         container: mirrors.tencent.com/ci/tlinux_ci:latest
