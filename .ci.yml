@@ -11,8 +11,6 @@ stages:
 - stage:
   - job:
       name: Linux Job
-      variables:
-        GIT_SUBMODULE_STRATEGY: none
       pool:
         container: mirrors.tencent.com/ci/tlinux_ci:latest
       steps:
