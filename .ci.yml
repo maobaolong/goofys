@@ -20,6 +20,8 @@ stages:
           scriptType: SHELL
           content: |
             #!/bin/bash
+            pwd
+            env
             go build -v .
       - taskType: marketBuild@latest
         displayName: Upload Artifacts
