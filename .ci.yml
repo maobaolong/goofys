@@ -39,5 +39,5 @@ stages:
           version: 1.*
           data:
             input:
-              filePath: "/home/baoloongmao/go/src/github.com/kahing/goofys"
+              filePath: "/home/baoloongmao/go/src/github.com/kahing/goofys/goofys"
               isCustomize: false
