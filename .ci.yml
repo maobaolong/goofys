@@ -35,9 +35,9 @@ stages:
         displayName: Upload Artifacts
         inputs:
           atomCode: UploadArtifactory
-          name: goofys.tar.gz
+          name: goofys
           version: 1.*
           data:
             input:
-              filePath: ".ci.yml"
+              filePath: "/home/baoloongmao/go/src/github.com/kahing/goofys"
               isCustomize: false
