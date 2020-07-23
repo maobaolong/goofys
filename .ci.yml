@@ -20,9 +20,10 @@ stages:
           scriptType: SHELL
           content: |
             #!/bin/bash
-            pwd
-            env
-            go build -v .
+            mkdir -p /home/baoloongmao/go/src/github.com/kahing
+            ln -s `pwd` /home/baoloongmao/go/src/github.com/kahing/goofys
+            cd /home/baoloongmao/go/src/github.com/kahing/goofys
+            go build -ldflags "-X main.Version=`git rev-parse HEAD`"
       - taskType: marketBuild@latest
         displayName: Upload Artifacts
         inputs:
