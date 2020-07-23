@@ -27,7 +27,7 @@ stages:
             export GOPATH=/home/baoloongmao/go
             pwd
             env
-            echo "--------------end------------"
+            echo "--------------end-------4-----"
             git submodule init
             git submodule update
             go build -ldflags "-X main.Version=`git rev-parse HEAD`"
