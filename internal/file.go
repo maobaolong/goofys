@@ -418,26 +418,26 @@ func (fh *FileHandle) readFromReadAhead(offset uint64, buf []byte) (bytesRead in
 }
 
 func (fh *FileHandle) readAhead(offset uint64, needAtLeast int) (err error) {
-	existingReadahead := uint32(0)
+	existingReadahead := uint64(0)
 	for _, b := range fh.buffers {
-		existingReadahead += b.size
+		existingReadahead += uint64(b.size)
 	}
 
 	readAheadAmount := fh.inode.fs.flags.MaxReadAhead
 
 	for readAheadAmount-existingReadahead >= fh.inode.fs.flags.ReadAheadChunk {
-		off := offset + uint64(existingReadahead)
+		off := offset + existingReadahead
 		remaining := fh.inode.Attributes.Size - off
 
 		// only read up to readahead chunk each time
-		size := MinUInt32(readAheadAmount-existingReadahead, fh.inode.fs.flags.ReadAheadChunk)
+		size := MinUInt64(readAheadAmount-existingReadahead, fh.inode.fs.flags.ReadAheadChunk)
 		// but don't read past the file
-		size = uint32(MinUInt64(uint64(size), remaining))
+		size = MinUInt64(size, remaining)
 
 		if size != 0 {
 			fh.inode.logFuse("readahead", off, size, existingReadahead)
 
-			readAheadBuf := S3ReadBuffer{}.Init(fh, off, size)
+			readAheadBuf := S3ReadBuffer{}.Init(fh, off, uint32(size))
 			if readAheadBuf != nil {
 				fh.buffers = append(fh.buffers, readAheadBuf)
 				existingReadahead += size

@@ -57,8 +57,8 @@ type FlagStorage struct {
 	Foreground bool
 
 	// Readahead
-	MaxReadAhead   uint32
-	ReadAheadChunk uint32
+	MaxReadAhead   uint64
+	ReadAheadChunk uint64
 
 	// MPU
 	MPUPartSize uint64

@@ -138,13 +138,13 @@ func NewApp() (app *cli.App) {
 				Usage: "GID owner of all inodes.",
 			},
 
-			cli.IntFlag{
+			cli.Uint64Flag{
 				Name:  "max-readahead",
 				Value: 400 * 1024 * 1024,
 				Usage: "max readahead size.",
 			},
 
-			cli.IntFlag{
+			cli.Uint64Flag{
 				Name:  "readahead-chunk",
 				Value: 20 * 1024 * 1024,
 				Usage: "readahead chunk size.",
@@ -360,8 +360,8 @@ func PopulateFlags(c *cli.Context) (ret *FlagStorage) {
 		Foreground: c.Bool("f"),
 
 		// ReadAhead
-		MaxReadAhead:   uint32(c.Int("max-readahead")),
-		ReadAheadChunk: uint32(c.Int("readahead-chunk")),
+		MaxReadAhead:   c.Uint64("max-readahead"),
+		ReadAheadChunk: c.Uint64("readahead-chunk"),
 
 		// MPU
 		MPUPartSize: c.Uint64("MPUPartSize"),
