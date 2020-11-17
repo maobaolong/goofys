@@ -40,7 +40,9 @@ type FlagStorage struct {
 
 	// Common Backend Config
 	UseContentType bool
+	IsAws          bool
 	Endpoint       string
+	UseApiV2       bool
 
 	Backend interface{}
 

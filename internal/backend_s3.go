@@ -175,7 +175,7 @@ func (s *S3Backend) detectBucketLocationByHEAD() (err error, isAws bool) {
 			s3Log.Debugf("%v = %v", k, v)
 		}
 	}
-	if server != nil && server[0] == "AmazonS3" {
+	if s.flags.IsAws || (server != nil && server[0] == "AmazonS3") {
 		isAws = true
 	}
 
@@ -281,7 +281,7 @@ func (s *S3Backend) Init(key string) error {
 }
 
 func (s *S3Backend) ListObjectsV2(params *s3.ListObjectsV2Input) (*s3.ListObjectsV2Output, string, error) {
-	if s.aws {
+	if s.flags.UseApiV2 || s.aws {
 		req, resp := s.S3.ListObjectsV2Request(params)
 		err := req.Send()
 		if err != nil {
